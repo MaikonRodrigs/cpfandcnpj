@@ -16,7 +16,6 @@ export const Container = styled.div`
 export const Title = styled.h1`
     margin-top: -10px;
 `;
-export const Row = styled.div``;
 
 export const Copy = styled.div`
     position: absolute;

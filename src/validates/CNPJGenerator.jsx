@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import * as S from './styles'
 
-
 const CNPJGenerator = () => {
   const [cnpj, setCnpj] = useState("");
   const [copied, setCopied] = useState(false);
@@ -23,7 +22,6 @@ const CNPJGenerator = () => {
     let sum = 0;
     let factor = 5;
 
-    // Calcula o primeiro dígito verificador
     for (let i = 0; i < 12; i++) {
       sum += digits[i] * factor;
       factor = factor === 2 ? 9 : factor - 1;
@@ -35,7 +33,6 @@ const CNPJGenerator = () => {
     sum = 0;
     factor = 6;
 
-    // Calcula o segundo dígito verificador
     for (let i = 0; i < 13; i++) {
       sum += digits[i] * factor;
       factor = factor === 2 ? 9 : factor - 1;
@@ -48,7 +45,7 @@ const CNPJGenerator = () => {
   };
 
   const formatCNPJ = (cnpj) => {
-    const formattedCNPJ = cnpj.toString().padStart(14, "0");
+    const formattedCNPJ = cnpj.toString().padStart(14, "");
     return `${formattedCNPJ.substr(0, 2)}.${formattedCNPJ.substr(
       2,
       3
@@ -70,50 +67,29 @@ const CNPJGenerator = () => {
   };
 
   return (
-    <>
-      <S.Container>
-        <S.Copy>
-          {copied && <p>CNPJ COPIADO</p>}
-        </S.Copy>
-        <S.Title>CNPJ</S.Title>
-        <S.Form>
-          <S.CpfChecked
-            type="checkbox"
-            checked={includeMask}
-            onChange={toggleIncludeMask}
-          />
-          <S.CnpjInput
-            type="text"
-            value={includeMask ? formatCNPJ(cnpj) : cnpj}
-            readOnly
-            ref={cnpjRef}
-          />
-          <S.Button onClick={() => setCnpj(generateRandomCNPJ())}><S.IconRefresh /></S.Button>
-          <S.Button onClick={copyCNPJ}>
-            <S.IconFileCopy />
-          </S.Button>
-        </S.Form>
-      </S.Container>
-
-
-      {/* <div className="CNPJGenerator">
-        <h1>CNPJ</h1>
-        <input
+    <S.Container>
+      <S.Copy>
+        {copied && <p>CNPJ COPIADO</p>}
+      </S.Copy>
+      <S.Title>CNPJ</S.Title>
+      <S.Form>
+        <S.CpfChecked
+          type="checkbox"
+          checked={includeMask}
+          onChange={toggleIncludeMask}
+        />
+        <S.CnpjInput
           type="text"
           value={includeMask ? formatCNPJ(cnpj) : cnpj}
           readOnly
           ref={cnpjRef}
         />
-        <button onClick={() => setCnpj(generateRandomCNPJ())}>
-          Gerar CNPJ
-        </button>
-        <button onClick={copyCNPJ}>Copiar CNPJ</button>
-      </div> */}
-
-
-    </>
-
-
+        <S.Button onClick={() => setCnpj(generateRandomCNPJ())}><S.IconRefresh /></S.Button>
+        <S.Button onClick={copyCNPJ}>
+          <S.IconFileCopy />
+        </S.Button>
+      </S.Form>
+    </S.Container>
   );
 };
 
