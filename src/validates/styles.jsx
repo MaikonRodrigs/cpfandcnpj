@@ -7,7 +7,7 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 40px;
+    padding: 25px 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     position: relative;
@@ -19,8 +19,8 @@ export const Title = styled.h1`
 
 export const Copy = styled.div`
     position: absolute;
-    top: 75px;
-    left: 70px;
+    top: 60px;
+    left: 50px;
 `;
 
 export const Form = styled.div`
