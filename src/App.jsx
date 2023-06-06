@@ -1,6 +1,6 @@
-import { useState } from 'react'
 import './App.css'
 
+import Footer from './footer';
 import CPFGenerator from "./validates/CPFGenerator";
 import CNPJGenerator from "./validates/CNPJGenerator";
 
@@ -10,9 +10,13 @@ function App() {
       <div>
         <CPFGenerator />
       </div>
-      {/* <div>
+      <br />
+      <div>
         <CNPJGenerator />
-      </div> */}
+      </div>
+      <div>
+        <Footer />
+      </div>
     </>
   )
 }

@@ -1,4 +1,6 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
+import * as S from './styles'
+
 
 const CNPJGenerator = () => {
   const [cnpj, setCnpj] = useState("");
@@ -68,28 +70,50 @@ const CNPJGenerator = () => {
   };
 
   return (
-    <div className="CNPJGenerator">
-      <h1>CNPJ</h1>
-      <input
-        type="text"
-        value={includeMask ? formatCNPJ(cnpj) : cnpj}
-        readOnly
-        ref={cnpjRef}
-      />
-      <button onClick={() => setCnpj(generateRandomCNPJ())}>
-        Gerar CNPJ
-      </button>
-      <button onClick={copyCNPJ}>Copiar CNPJ</button>
-      <label>
+    <>
+      <S.Container>
+        <S.Copy>
+          {copied && <p>CNPJ COPIADO</p>}
+        </S.Copy>
+        <S.Title>CNPJ</S.Title>
+        <S.Form>
+          <S.CpfChecked
+            type="checkbox"
+            checked={includeMask}
+            onChange={toggleIncludeMask}
+          />
+          <S.CnpjInput
+            type="text"
+            value={includeMask ? formatCNPJ(cnpj) : cnpj}
+            readOnly
+            ref={cnpjRef}
+          />
+          <S.Button onClick={() => setCnpj(generateRandomCNPJ())}><S.IconRefresh /></S.Button>
+          <S.Button onClick={copyCNPJ}>
+            <S.IconFileCopy />
+          </S.Button>
+        </S.Form>
+      </S.Container>
+
+
+      {/* <div className="CNPJGenerator">
+        <h1>CNPJ</h1>
         <input
-          type="checkbox"
-          checked={includeMask}
-          onChange={toggleIncludeMask}
+          type="text"
+          value={includeMask ? formatCNPJ(cnpj) : cnpj}
+          readOnly
+          ref={cnpjRef}
         />
-        Incluir máscara
-      </label>
-      {copied && <p>CNPJ copiado!</p>}
-    </div>
+        <button onClick={() => setCnpj(generateRandomCNPJ())}>
+          Gerar CNPJ
+        </button>
+        <button onClick={copyCNPJ}>Copiar CNPJ</button>
+      </div> */}
+
+
+    </>
+
+
   );
 };
 

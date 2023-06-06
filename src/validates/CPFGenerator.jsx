@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
+import * as S from './styles'
 
 const CPFGenerator = () => {
   const [cpf, setCpf] = useState("");
@@ -9,6 +10,7 @@ const CPFGenerator = () => {
   const generateCPF = () => {
     const randomCPF = generateRandomCPF();
     setCpf(formatCPF(randomCPF));
+    setCopied(false);
   };
 
   const generateRandomCPF = () => {
@@ -75,30 +77,33 @@ const CPFGenerator = () => {
 
   const toggleIncludeMask = () => {
     setIncludeMask(!includeMask);
+    generateCPF()
   };
 
   return (
-    <div>
-      <h1>CPF</h1>
-      <input
-        type="text"
-        value={includeMask ? cpf : formatCPF(cpf)}
-        readOnly
-        ref={cpfRef}
-      />{" "}
-      <br />
-      <button onClick={generateCPF}>Gerar CPF</button>
-      <button onClick={copyCPF}>Copiar CPF</button>
-      <label>
-        <input
+    <S.Container>
+      <S.Copy>
+        {copied && <p>CPF COPIADO</p>}
+      </S.Copy>
+      <S.Title>CPF</S.Title>
+      <S.Form>
+        <S.CpfChecked
           type="checkbox"
           checked={includeMask}
           onChange={toggleIncludeMask}
         />
-        Incluir máscara
-      </label>
-      {copied && <p>CPF copiado!</p>}
-    </div>
+        <S.CpfInput
+          type="text"
+          value={includeMask ? cpf : formatCPF(cpf)}
+          readOnly
+          ref={cpfRef}
+        />
+        <S.Button onClick={generateCPF}><S.IconRefresh /></S.Button>
+        <S.Button onClick={copyCPF}>
+          <S.IconFileCopy />
+        </S.Button>
+      </S.Form>
+    </S.Container>
   );
 };
 
